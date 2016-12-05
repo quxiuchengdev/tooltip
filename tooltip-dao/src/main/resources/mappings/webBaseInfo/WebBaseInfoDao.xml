@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qxcwl.tooltip.dao.webBaseInfo.WebBaseInfoDao">
+
+    <resultMap id="webBaseInfoResult" type="WebBaseInfo">
+        <id property="id" column="id"></id>
+        <result property="productName" column="productName"></result>
+        <result property="copyRightYear" column="copyRightYear"></result>
+        <result property="version" column="version"></result>
+        <result property="company" column="company"></result>
+        <result property="enable" column="enable"></result>
+        <result property="createBy.id" column="createBy.id"></result>
+        <result property="createDate" column="createDate"></result>
+        <result property="updateBy.id" column="updateBy.id"></result>
+        <result property="updateDate" column="updateDate"></result>
+        <result property="remarks" column="remarks"></result>
+        <result property="history" column="history"></result>
+        <result property="delFlag" column="delFlag"></result>
+    </resultMap>
+
+	<sql id="webBaseInfoColumns">
+    	a.id,
+        a.product_name as productName,
+        a.copy_right_year as copyRightYear,
+        a.version,
+        a.company,
+        a.enable,
+        a.remarks,
+        a.create_by as "createBy.id",
+        a.update_by as "updateBy.id",
+        a.create_date,
+        a.update_date,
+        a.history,
+        a.del_flag
+    </sql>
+	
+	<sql id="webBaseInfoJoins">
+    </sql>
+
+    <select id="get" resultMap="webBaseInfoResult">
+        SELECT
+        <include refid="webBaseInfoColumns"/>
+        FROM web_base_info a
+        <include refid="webBaseInfoJoins"/>
+        WHERE a.id = #{id}
+    </select>
+
+    <select id="getEnabled" resultMap="webBaseInfoResult">
+        SELECT
+        <include refid="webBaseInfoColumns"/>
+        FROM web_base_info a
+        <include refid="webBaseInfoJoins"/>
+        WHERE a.enable = '1'
+    </select>
+
+    <select id="findList" resultMap="webBaseInfoResult">
+        SELECT
+        <include refid="webBaseInfoColumns"/>
+        FROM web_base_info a
+        <include refid="webBaseInfoJoins"/>
+        WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO web_base_info(
+        id,
+        web_admin_path,
+        web_front_path,
+        product_name,
+        copy_right_year,
+        version,
+        company,
+        enable,
+        history,
+        remarks,
+        create_by,
+        create_date,
+        update_by,
+        update_date,
+        del_flag
+        ) VALUES (
+        #{id},
+        #{webAdminPath},
+        #{webFrontPath},
+        #{productName},
+        #{copyRightYear},
+        #{version},
+        #{company},
+        #{enable},
+        #{history},
+        #{remarks},
+        #{createBy.id},
+        #{createDate},
+        #{updateBy.id},
+        #{updateDate},
+        #{delFlag}
+        )
+    </insert>
+
+    <update id="update">
+        UPDATE web_base_info SET
+        id = #{id},
+        web_admin_path = #{webAdminPath},
+        web_front_path = #{webFrontPath},
+        product_name = #{productName},
+        copy_right_year = #{copyRightYear},
+        version = #{version},
+        company = #{company},
+        history = #{history},
+        enable = #{enable},
+        remarks = #{remarks},
+        create_by = #{createBy.id},
+        create_date = #{createDate},
+        update_by = #{updateBy.id},
+        update_date = #{updateDate},
+        del_flag = #{delFlag}
+        where id = #{id}
+    </update>
+
+
+    <update id="delete">
+        UPDATE web_base_info SET
+        del_flag = #{DEL_FLAG_DELETE}
+        WHERE id = #{id}
+    </update>
+
+</mapper>
