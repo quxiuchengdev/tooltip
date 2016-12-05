@@ -54,9 +54,6 @@ window.jQuery || document.write("<script src='${ctxStatic}/ace/assets/js/jquery1
 <script src="${ctxStatic}/ace/assets/js/ace/ace.sidebar-scroll-1.js"></script>
 <script src="${ctxStatic}/ace/assets/js/ace/ace.submenu-hover.js"></script>
 <script src="${ctxStatic}/ace/assets/js/ace/ace.widget-box.js"></script>
-<script src="${ctxStatic}/ace/assets/js/ace/ace.settings.js"></script>
-<script src="${ctxStatic}/ace/assets/js/ace/ace.settings-rtl.js"></script>
-<script src="${ctxStatic}/ace/assets/js/ace/ace.settings-skin.js"></script>
 <script src="${ctxStatic}/ace/assets/js/ace/ace.widget-on-reload.js"></script>
 <script src="${ctxStatic}/ace/assets/js/ace/ace.searchbox-autocomplete.js"></script>
 <script src="${ctxStatic}/ace/assets/js/jquery-ui.js"></script>
@@ -142,6 +139,7 @@ window.jQuery || document.write("<script src='${ctxStatic}/ace/assets/js/jquery1
 
 <!-- zTree js -->
 <script type="text/javascript" src="${ctxStatic}/zTree_v3-master/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="${ctxStatic}/zTree_v3-master/js/jquery.ztree.excheck.js"></script>
 
 <%--treeTable--%>
 <script src="${ctxStatic}/treetable/3.2.0/jquery.treetable.js" type="text/javascript"></script>

@@ -22,8 +22,8 @@
             <script type="text/javascript">
                 try{ace.settings.check('main-container' , 'fixed')}catch(e){}
             </script>
+            <jsp:include page="/WEB-INF/views/common/left.jsp"></jsp:include>
             <div class="main-content">
-                <jsp:include page="/WEB-INF/views/common/left.jsp"></jsp:include>
                 <div class="main-content">
                     <div class="main-content-inner">
                         <!-- #section:basics/content.breadcrumbs -->
@@ -73,9 +73,9 @@
 
             <jsp:include page="/WEB-INF/views/common/foot.jsp"></jsp:include>
         </div>
-        <%--在页脚引入javascript页面--%>
-       <%-- <%@ include file="/WEB-INF/views/include/includeJs.jsp"%>--%>
-        <!--用户自定义javascript脚本1-->
-        <sitemesh:write property='footScriptTag'></sitemesh:write>
+        <%--解决设置好使问题--%>
+        <script src="${ctxStatic}/ace/assets/js/ace/ace.settings.js"></script>
+        <script src="${ctxStatic}/ace/assets/js/ace/ace.settings-rtl.js"></script>
+        <script src="${ctxStatic}/ace/assets/js/ace/ace.settings-skin.js"></script>
     </body>
 </html>

@@ -58,12 +58,12 @@
                             },
                             "columns": [ //这个属性下的设置会应用到所有列，按顺序没有是空
                                 //{"mData": 'id',"className":'center',"orderable":false}, //mData 表示发请求时候本列的列明，返回的数据中相同下标名字的数据会填充到这一列
-                                {"mData": 'name',"orderable":false}, // sDefaultContent 如果这一列不需要填充数据用这个属性，值可以不写，起占位作用
-                                {"mData": 'enname'},
-                                {"mData": 'roleType'},
-                                {"mData": 'useable'},
-                                {"mData": 'remarks'},
-                                {"mData": 'id',"orderable":false},//sClass 表示给本列加class
+                                {"data": 'name',"orderable":false}, // sDefaultContent 如果这一列不需要填充数据用这个属性，值可以不写，起占位作用
+                                {"data": 'enname'},
+                                {"data": 'roleType'},
+                                {"data": 'useable'},
+                                {"data": 'remarks'},
+                                {"data": 'id',"orderable":false},//sClass 表示给本列加class
 
                             ],
                             "columnDefs":[
@@ -88,7 +88,7 @@
                              $('td', row).eq(0).addClass("center");
                              } */
                             //绘图回调函数
-                            "fnDrawCallback": function(){
+                            "fnDrawCallback": function(oSettings){
                                 //增加提示框
                                 $("[data-rel=tooltip]" ).tooltip({
                                     show: null,
