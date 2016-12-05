@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(value = "${adminPath}/sys/menu")
+@RequestMapping(value = "${adminPath}/menu")
 public class MenuController extends BaseController {
 
 	@Autowired
@@ -58,7 +58,7 @@ public class MenuController extends BaseController {
 		model.addAttribute("list", list);
 		//model.addAttribute("paginator", list.getPaginator());
 		// model.addAttribute("paginator", paginator);
-		return "modules/sys/menuList";
+		return "modules/menu/menuList";
 	}
 
 	@RequestMapping(value = "form")
@@ -68,7 +68,7 @@ public class MenuController extends BaseController {
 			menu.setParent(parent);
 		}
 		model.addAttribute("menu", menu);
-		return "modules/sys/menuForm";
+		return "modules/menu/menuForm";
 	}
 	
 	@RequestMapping(value = "save")
@@ -87,7 +87,7 @@ public class MenuController extends BaseController {
 			menuService.update(menu);
 		}
 		model.addAttribute("menu", menu);
-		return "redirect:" + adminPath + "/sys/menu/";
+		return "redirect:" + adminPath + "/menu/";
 	}
 	
 

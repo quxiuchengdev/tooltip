@@ -24,37 +24,33 @@ public abstract class DataEntity<T> extends BaseEntity<T> {
 	/**
 	 * 备注
 	 */
-	@JSONField(serialize = false)
 	protected String remarks;
 	
 	/**
 	 * 创建者
 	 */
-	@JSONField(serialize = false)
 	protected User createBy;
 	
 	/**
 	 * 创建日期
 	 */
-	@JSONField(serialize = false)
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	protected Date createDate;
 	
 	/**
 	 * 更新者
 	 */
-	@JSONField(serialize = false)
 	protected User updateBy;
 	
 	/**
 	 * 更新日期
 	 */
-	@JSONField(serialize = false)
+	@JSONField(format = "yyyy-MM-dd HH:mm:ss")
 	protected Date updateDate;
 	
 	/**
 	 * 删除标记（0：正常；1：删除；2：审核）
 	 */
-	@JSONField(serialize = false)
 	protected String delFlag;
 	
 	/**

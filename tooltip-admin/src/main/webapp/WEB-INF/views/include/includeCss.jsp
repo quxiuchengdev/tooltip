@@ -45,3 +45,10 @@
 <script src="${ctxStatic}/ace/assets/js/respond.js"></script>
 <![endif]-->
 
+<%--zTree css--%>
+<link rel="stylesheet" href="${ctxStatic}/zTree_v3-master/css/zTreeStyle/zTreeStyle.css" type="text/css">
+
+<%-- treetable --%>
+<link rel="stylesheet" href="${ctxStatic}/treetable/3.2.0/css/jquery.treetable.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="${ctxStatic}/treetable/3.2.0/css/jquery.treetable.theme.default.css" type="text/css"/>
+

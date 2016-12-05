@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(value = "${adminPath}/sys/role")
+@RequestMapping(value = "${adminPath}/role")
 public class RoleController extends BaseController {
 
 	@Autowired
@@ -53,13 +53,13 @@ public class RoleController extends BaseController {
 		Page<Role> page= roleService.findPage(new Page(request,response), new Role());
 		model.addAttribute("list", page.getList());
 		model.addAttribute("page", page);
-		return "modules/sys/roleList";
+		return "modules/role/roleList";
 	}
 	
 	@RequestMapping(value = "form")
 	public String form(Role role,HttpServletRequest request, HttpServletResponse response,Model model){
 		model.addAttribute("role", role);
-		return "modules/sys/roleForm";
+		return "modules/role/roleForm";
 	}
 	
 	@RequestMapping(value = "save")
@@ -87,34 +87,31 @@ public class RoleController extends BaseController {
 			role.setUpdateBy(new User("1"));
 			roleService.update(role);
 		}
-		return "redirect:" + adminPath + "/sys/role/list?repage";
+		return "redirect:" + adminPath + "/role/list?repage";
 	}
 
 	@RequestMapping(value = "delete")
 	public String delete(Role role, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
 		roleService.delete(role);
-		return "redirect:" + adminPath + "/sys/role/list?repage";
+		return "redirect:" + adminPath + "/role/list?repage";
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "datatables")
 	public String datatables(Role role, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes,
-			@RequestParam(required=false,defaultValue="10") int iDisplayStart ,
-			@RequestParam(required=false,defaultValue="1") int iDisplayLength) {
+			@RequestParam(required=false,defaultValue="10") int start ,
+			@RequestParam(required=false,defaultValue="1") int length) {
+		//
+		String[] sortCols = {"name","enname", "roleType", "useable", "remarks"};
+		String draw = request.getParameter("draw");
+		//需要排序的列
+		String orderColumn = request.getParameter("order[0][column]");
+		//排序方式
+		String orderDir = request.getParameter("order[0][dir]");
+
+		String search = request.getParameter("search[value]");
 		
-		String sEcho = request.getParameter("sEcho");
-		//String iDisplayStart = request.getParameter("iDisplayStart");
-		//String iDisplayLength = request.getParameter("iDisplayLength");
-		String iSortCol_0 = request.getParameter("iSortCol_0");
-		String sSortDir_0 = request.getParameter("sSortDir_0");
-		String sSearch = request.getParameter("sSearch");
-		String iTotalRecords = request.getParameter("iTotalRecords");
-		String iTotalDisplayRecords = request.getParameter("iTotalDisplayRecords");
-		String aaData = request.getParameter("aaData");
-		String sColumns = request.getParameter("sColumns");
-		
-		Page<Role> list= roleService.findPage(new Page(getPage(iDisplayStart, iDisplayLength),iDisplayLength), new Role());
-	//	Paginator paginator = list.getPaginator();
+		Page<Role> list= roleService.findPage(new Page(getPage(start, length),length), new Role());
 		JSONArray jsonArray = new JSONArray();
 		for (Role r : list.getList()) {
 			JSONObject j = new JSONObject();
@@ -128,12 +125,10 @@ public class RoleController extends BaseController {
         	jsonArray.add(j);
 		}
 		JSONObject json = new JSONObject();
-        json.put("aaData", jsonArray.toString());
-        json.put("iTotalRecords", list.getCount());
-        json.put("iTotalDisplayRecords", list.getCount());
-        json.put("sEcho", sEcho);
-       // json.put("pageNo", paginator.getPage());
-       // json.put("pageSize", paginator.getTotalPages());
+        json.put("data", jsonArray);
+        json.put("totalRecords", list.getCount());
+        json.put("recordsFiltered", list.getCount());
+        json.put("draw", draw);
 		return json.toString();
 	}
 

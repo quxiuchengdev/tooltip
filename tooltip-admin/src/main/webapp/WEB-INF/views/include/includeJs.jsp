@@ -140,5 +140,11 @@ window.jQuery || document.write("<script src='${ctxStatic}/ace/assets/js/jquery1
 <!-- 定制列展示 -->
 <script src="${ctxStatic}/jquery.column/jquery.cookie.js" type="text/javascript"></script>
 
+<!-- zTree js -->
+<script type="text/javascript" src="${ctxStatic}/zTree_v3-master/js/jquery.ztree.core.js"></script>
+
+<%--treeTable--%>
+<script src="${ctxStatic}/treetable/3.2.0/jquery.treetable.js" type="text/javascript"></script>
+
 <%--添加整体js--%>
 <script src="${ctxStatic}/tooltip/tooltip.js" type="text/javascript"></script>

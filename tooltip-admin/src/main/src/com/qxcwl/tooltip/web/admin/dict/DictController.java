@@ -95,7 +95,7 @@ public class DictController extends BaseController {
 			@RequestParam(required=false,defaultValue="1") int length) {
 		//定义需要排序的列
         String[] sortCols = {"","value", "label", "type", "sort","description"};
-		String sEcho = request.getParameter("sEcho");
+		String draw = request.getParameter("draw");
 		//需要排序的列
 		String orderColumn = request.getParameter("order[0][column]");
 		//排序方式
@@ -125,24 +125,12 @@ public class DictController extends BaseController {
 		Page<Dict> dictPage = dictService.findPage(page, dict);
 		
 		JSONObject json = new JSONObject();
-		List<Dict> list = dictPage.getList();
-		JSONArray ja = new JSONArray();
-		for (Dict dict1 : list) {
-			JSONObject jo = new JSONObject();
-			jo.put("description", dict1.getDescription());
-			jo.put("id", dict1.getId());
-			jo.put("label", dict1.getLabel());
-			jo.put("sort", dict1.getSort());
-			jo.put("type", dict1.getType());
-			jo.put("value", dict1.getValue());
-			ja.add(jo);
-		}
 
-		json.put("aaData", JSON.parseArray(JSON.toJSONString(list)));
-        json.put("iTotalRecords", dictPage.getCount());
-        json.put("iTotalDisplayRecords", dictPage.getCount());
-        json.put("sEcho", sEcho);
-
+		json.put("data", JSON.parseArray(JSON.toJSONString(dictPage.getList())));
+        json.put("totalRecords", dictPage.getCount());
+        json.put("recordsFiltered", dictPage.getCount());
+        json.put("draw", draw);
+		System.out.println(json.toJSONString());
 		return json.toJSONString();
 	}
 	

@@ -14,22 +14,19 @@
 	<body>
 		<script type="text/javascript">
 		$(document).ready(function() {
-			$('.date-picker').datepicker({
-				autoclose: true,
-				todayHighlight: true
-			});
+
 		});
 		
 		</script>
 		<div class="tabbable">
 			<ul class="nav nav-tabs">
 				<li>
-					<a href="${ctx}/sys/dict">
+					<a href="${ctx}/dict/list">
 						字典列表
 					</a>
 				</li>
 				<li class="active">
-					<a href="${ctx}/sys/dict/form?id=${user.id}">
+					<a href="${ctx}/dict/form?id=${user.id}">
 						字典添加
 					</a>
 				</li>
@@ -38,7 +35,7 @@
 		<div class="widget-box" style="margin:0px 0px 6px 0px;">
 			<div class="widget-body">
 				<div class="widget-main">
-					<form:form id="inputForm" modelAttribute="dict" action="${ctx}/sys/dict/save" method="post" class="form-horizontal">
+					<form:form id="inputForm" modelAttribute="dict" action="${ctx}/dict/save" method="post" class="form-horizontal">
 						<!-- ID -->
 						<form:hidden path="id"/>
 						<div class="hr hr-24"></div>
@@ -51,7 +48,7 @@
 								</span>
 							</div>
 							<div class="help-block col-xs-12 col-sm-reset inline">
-								<font color="red">*</font>
+                                <span style="color:red">*</span>
 							</div>
 						</div>
 						
@@ -63,7 +60,7 @@
 								</span>
 							</div>
 							<div class="help-block col-xs-12 col-sm-reset inline">
-								<font color="red">*</font>
+                                <span style="color:red">*</span>
 							</div>
 						</div>
 						
@@ -75,7 +72,7 @@
 								</span>
 							</div>
 							<div class="help-block col-xs-12 col-sm-reset inline">
-								<font color="red">*</font>
+                                <span style="color:red">*</span>
 							</div>
 						</div>
 						
@@ -89,7 +86,7 @@
 								</span>
 							</div>
 							<div class="help-block col-xs-12 col-sm-reset inline">
-								<font color="red">*</font>
+                                <span style="color:red">*</span>
 							</div>
 						</div>
 						

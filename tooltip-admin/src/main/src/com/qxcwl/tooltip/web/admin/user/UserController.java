@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
-@RequestMapping(value = "${adminPath}/sys/user")
+@RequestMapping(value = "${adminPath}/user")
 public class UserController extends BaseController {
 
 	@Autowired
@@ -47,17 +47,17 @@ public class UserController extends BaseController {
 	@RequestMapping(value = {"list",""})
 	public String list(User user ,HttpServletRequest request, HttpServletResponse response,Model model){
 		//PageList<User> list= userService.findPage(new Paginator(request,true), new User());
-		Page<User> page= userService.findPage(new Page(request,response), new User());
-		model.addAttribute("list", page.getList());
-		model.addAttribute("page", page);
-		return "modules/sys/userList";
+		//Page<User> page= userService.findPage(new Page(request,response), new User());
+		//model.addAttribute("list", page.getList());
+		//model.addAttribute("page", page);
+		return "modules/user/userList";
 	}
 	
 	@RequestMapping(value = "form")
 	public String form(User user,HttpServletRequest request, HttpServletResponse response,Model model){
 		model.addAttribute("user", user);
 		model.addAttribute("roleList", roleService.findList(new Role()));
-		return "modules/sys/userForm";
+		return "modules/user/userForm";
 	}
 	
 	@RequestMapping(value = "save")
@@ -82,31 +82,30 @@ public class UserController extends BaseController {
 		}else{
 			userService.update(user);
 		}
-		return "redirect:" + adminPath + "/sys/user/list?repage";
+		return "redirect:" + adminPath + "/user/list?repage";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "datatables")
 	public String datatables(User user, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes,
-			@RequestParam(required=false,defaultValue="10") int iDisplayStart ,
-			@RequestParam(required=false,defaultValue="1") int iDisplayLength) {
+			@RequestParam(required=false,defaultValue="10") int start ,
+			@RequestParam(required=false,defaultValue="1") int length) {
+		//定义需要排序的列
+		String[] sortCols = {"","nickname", "username", "mobileNumber", "regisTime","status"};
+
+		String draw = request.getParameter("draw");
+		//需要排序的列
+		String orderColumn = request.getParameter("order[0][column]");
+		//排序方式
+		String orderDir = request.getParameter("order[0][dir]");
+
+		String search = request.getParameter("search[value]");
 		
-		String sEcho = request.getParameter("sEcho");
-		//String iDisplayStart = request.getParameter("iDisplayStart");
-		//String iDisplayLength = request.getParameter("iDisplayLength");
-		String iSortCol_0 = request.getParameter("iSortCol_0");
-		String sSortDir_0 = request.getParameter("sSortDir_0");
-		String sSearch = request.getParameter("sSearch");
-		String iTotalRecords = request.getParameter("iTotalRecords");
-		String iTotalDisplayRecords = request.getParameter("iTotalDisplayRecords");
-		String aaData = request.getParameter("aaData");
-		String sColumns = request.getParameter("sColumns");
-		
-		Page<User> list= userService.findPage(new Page(getPage(iDisplayStart, iDisplayLength),iDisplayLength), new User());
-	//	Paginator paginator = list.getPaginator();
+		Page<User> list= userService.findPage(new Page(getPage(start, length),length), new User());
 		JSONArray jsonArray = new JSONArray();
 		for (User u : list.getList()) {
 			JSONObject j = new JSONObject();
+        	j.put("id", u.getId());
         	j.put("nickname", u.getNickname());
         	j.put("username", u.getUsername()==null?"":u.getUsername());
         	j.put("mobileNumber", u.getMobileNumber()==null?"":u.getMobileNumber());
@@ -115,12 +114,12 @@ public class UserController extends BaseController {
         	jsonArray.add(j);
 		}
 		JSONObject json = new JSONObject();
-        json.put("aaData", jsonArray.toString());
-        json.put("iTotalRecords", list.getCount());
-        json.put("iTotalDisplayRecords", list.getCount());
-        json.put("sEcho", sEcho);
-       // json.put("pageNo", paginator.getPage());
-       // json.put("pageSize", paginator.getTotalPages());
+        json.put("data", jsonArray);
+        json.put("recordsTotal", list.getCount());
+        json.put("recordsFiltered", list.getCount());
+        json.put("draw", draw);
+		System.out.println(json.toJSONString());
+
 		return json.toString();
 	}
 	

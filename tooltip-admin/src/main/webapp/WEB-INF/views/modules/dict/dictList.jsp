@@ -15,7 +15,6 @@
 	<body>
 		<script type="text/javascript">
 
-
             var table;
             $(document).ready(function() {
 
@@ -30,6 +29,7 @@
 
                 var contentTable = $('#contentTabel')
                     .dataTable( {
+                        "info" : true,
                         "autoWidth": false,
                         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                         "language": {
@@ -38,7 +38,7 @@
                             "zeroRecords": "没有匹配结果",
                             "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
                             "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                            "infoFiltered": "(由 _MAX_ 项结果过滤)",
+                            "infoFiltered": "",
                             "infoPostFix": "",
                             "search": "搜索:",
                             "url": "",
@@ -76,7 +76,7 @@
                             {"data": 'type'},
                             {"data": 'sort'},
                             {"data": 'description'},
-                            {"data": 'id',"bSortable":false},//sClass 表示给本列加class
+                            {"data": 'id',"orderable":false},//sClass 表示给本列加class
 
                         ],
                         "columnDefs":[
@@ -99,10 +99,10 @@
                                 "sortable":false,
                                 "data": "id", // 数据列名
                                 "render": function(data, type, full) { // 返回自定义内容
-                                    var html = "<div class='hidden-sm hidden-xs action-buttons'>";
-                                    html += "<a title='添加' class='data-rel blue' href='${ctx}/dict/add?id=" + data + "' ><i class='ace-icon fa fa-plus-square-o bigger-130'></i></a>";
-                                    html += "<a title='修改' class='data-rel green' href='${ctx}/dict/form?id=" + data + "' ><i class='ace-icon fa fa-pencil-square-o bigger-130'></i></a>";
-                                    html += "<a title='删除' class='data-rel red' href='${ctx}/dict/delete?id=" + data + "' onclick='return confirmx(\"删除吗?\",this.href)'><i class='ace-icon fa fa-trash-o bigger-130'></i></a>";
+                                    var html = "<div class='action-buttons'>";
+                                    html += "<a title='添加' data-rel='tooltip' class='blue' href='${ctx}/dict/add?id=" + data + "' ><i class='ace-icon fa fa-plus-square-o bigger-130'></i></a>";
+                                    html += "<a title='修改' data-rel='tooltip' class='green' href='${ctx}/dict/form?id=" + data + "' ><i class='ace-icon fa fa-pencil-square-o bigger-130'></i></a>";
+                                    html += "<a title='删除' data-rel='tooltip' class='red' href='${ctx}/dict/delete?id=" + data + "' onclick='return confirmx(\"删除吗?\",this.href)'><i class='ace-icon fa fa-trash-o bigger-130'></i></a>";
                                     html += "</div>";
                                     return html;
                                 }
@@ -116,9 +116,9 @@
                          $('td', row).eq(0).addClass("center");
                          } */
                         //绘图回调函数
-                        "drawCallback": function(){
+                        "drawCallback": function(oSettings){
                             //增加提示框
-                            $(".data-rel" ).tooltip({
+                            $("[data-rel=tooltip]" ).tooltip({
                                 show: null,
                                 position: {
                                     my: "left top",
@@ -128,7 +128,6 @@
                                     ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast" );
                                 }
                             });
-                            $('[data-rel=popover]').popover({html:true});
                             var oTable = $("#contentTabel").dataTable();
                             $('#redirect').keypress(function(e){
                                 var c=e.keyCode||e.which;
@@ -142,22 +141,20 @@
                                     }
                                 }
                             });
-                            //全选
-                            $('#redirect').click(function(){
-                                $('#redirect').select();
-                            });
-
-
-                        },
-                        "infoCallback":function(oSettings, iStart, iEnd, iMax, iTotal, sPre){
-                            //回调函数
+                            //设置选择跳转指定页
                             var pageNum =  Math.ceil( oSettings._iDisplayStart / oSettings._iDisplayLength );
                             if(pageNum==null){
                                 pageNum = 0;
                             }
                             pageNum = pageNum + 1;
                             $("#redirect").val(pageNum);
-                        }
+
+                            //全选
+                            $('#redirect').click(function(){
+                                $('#redirect').select();
+                            });
+                        },
+
                     } );
 
                 $("#searchBtn").click(function(){
@@ -172,7 +169,7 @@
         </script>
 
 		<div class="tabbable">
-			<ul class="nav nav-tabs" id="myTab">
+			<ul class="nav nav-tabs">
 				<li class="active">
 					<a>
 						字典列表
@@ -194,45 +191,43 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-8">
 								<div class="input-group">
-									<table class="">
-										<tbody>
-											<tr>
-												<td>
-													<%--<label style="font-size: 13px;">&nbsp;标签:&nbsp;</label>--%>
-                                                        &nbsp;&nbsp;<span class="label label-info">标签:</span>&nbsp;&nbsp;
-												</td>
-												<td>
-													<input class="input-sm" type="text" id="label">
-												</td>
-												<td>
+                                    <table class="">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <%--<label style="font-size: 13px;">&nbsp;标签:&nbsp;</label>--%>
+                                                    &nbsp;&nbsp;<span class="label label-info">标签:</span>&nbsp;&nbsp;
+                                                </td>
+                                                <td>
+                                                    <input class="input-sm" type="text" id="label">
+                                                </td>
+                                                <td>
                                                     &nbsp;&nbsp; <span class="label label-info">类型:</span>&nbsp;&nbsp;
-                                                    <%--<label class="col-sm-3 control-label no-padding-right" > Text Field </label>--%>
-												</td>
-												<td>
-													<input class="input-sm" type="text" id="type">
-												</td>
-												<td>
-													<%--<label style="font-size: 13px;">&nbsp;描述:&nbsp;</label>--%>
-                                                        &nbsp;&nbsp;<span class="label label-info">描述:</span>&nbsp;&nbsp;
-												</td>
-												<td>
-													<input class="input-sm" type="text" id="description">
-												</td>
-												<td>
-													&nbsp;&nbsp;
-													<button type="button" class="btn btn-purple btn-sm" id="searchBtn">
-														搜索
-														<i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
-													</button>
-													&nbsp;&nbsp;
-													<button type="button" class="btn btn-blue3 btn-sm">
-														删除一堆
-														<i class="ace-icon fa fa-trash-o icon-on-right bigger-110"></i>
-													</button>
-												</td>
-											</tr>
-										</tbody>
-									</table>
+                                                </td>
+                                                <td>
+                                                    <input class="input-sm" type="text" id="type">
+                                                </td>
+                                                <td>
+                                                    &nbsp;&nbsp;<span class="label label-info">描述:</span>&nbsp;&nbsp;
+                                                </td>
+                                                <td>
+                                                    <input class="input-sm" type="text" id="description">
+                                                </td>
+                                                <td>
+                                                    &nbsp;&nbsp;
+                                                    <button type="button" class="btn btn-purple btn-sm" id="searchBtn">
+                                                        搜索
+                                                        <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
+                                                    </button>
+                                                    &nbsp;&nbsp;
+                                                    <button type="button" class="btn btn-blue3 btn-sm">
+                                                        删除一堆
+                                                        <i class="ace-icon fa fa-trash-o icon-on-right bigger-110"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
 								</div>
 							</div>
 						</div>
@@ -249,9 +244,9 @@
 					Results for "Latest Registered Domains"
 				</div> -->
 				<%@include file="retain.jsp" %>
-				<table id="contentTabel" class="table table-striped table-bordered table-hover dataTable" aria-describedby="sample-table-2_info">
+				<table id="contentTabel" class="table table-striped table-bordered table-hover dataTable" >
 					<thead>
-						<tr role="row">
+						<tr>
 							<th class="center sorting_disabled">
 								<label class="position-relative"> 
 									<input type="checkbox" class="ace"><span class="lbl"></span>
@@ -279,14 +274,10 @@
 							</th>
 						</tr>
 					</thead>
-					<tbody role="alert" aria-live="polite" aria-relevant="all">
+					<tbody>
 					</tbody>
 				</table>
 			</div>
 		</div>
 	</body>
-    <%--sitemesh3自定义标签--%>
-    <footScriptTag>
-
-    </footScriptTag>
 </html>
