@@ -29,7 +29,7 @@
 
     <!--web全局监控-->
     <listener>
-        <listener-class>com.qxcwl.tooltip.web.admin.listener.WebContextListener</listener-class>
+        <listener-class>com.qxcwl.tooltip.web.listener.WebContextListener</listener-class>
     </listener>
 
     <!---->

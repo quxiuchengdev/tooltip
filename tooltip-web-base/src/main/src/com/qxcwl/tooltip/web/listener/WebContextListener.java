@@ -1,4 +1,4 @@
-package com.qxcwl.tooltip.web.admin.listener;
+package com.qxcwl.tooltip.web.listener;
 
 import org.springframework.web.context.WebApplicationContext;
 

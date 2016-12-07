@@ -105,7 +105,8 @@
 		<div class="widget-body">
 			<div class="widget-main">
 				<form:form id="inputForm" modelAttribute="menu" action="${ctx}/menu/save" method="post" class="form-horizontal">
-					<!-- ID -->
+                    <input type="text" name="token" value="${token}" />
+                    <!-- ID -->
 					<form:hidden path="id"/>
 					<div class="hr hr-24"></div>
 					<div class="form-group">

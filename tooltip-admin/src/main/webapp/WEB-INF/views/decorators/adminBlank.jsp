@@ -15,8 +15,53 @@
         <%@include file="/WEB-INF/views/include/includeCss.jsp"%>
         <%@ include file="/WEB-INF/views/include/includeJs.jsp"%>
         <sitemesh:write property='head'></sitemesh:write>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                //设置激活
+               /* $("#menu li .enda").click(function(){
+
+                     //if($("#submenuLabel").is(":checked")==true){
+                     //点击不是一个菜单
+                     if($("#menu li .active .enda").eq(0).attr("id")!=$(this).attr("id")){
+                         $("#menu *").removeClass("open");
+                         $("#menu .submenu").css("display","none");
+                         $(this).parent().parents("li").addClass("open");
+                     }
+                     //	}
+                     $("#menu *").removeClass("active");
+                     //$("#menu *").removeClass("open");
+                     $(this).parents("li").addClass("active");
+                     $(this).parents(".submenu").css("display","block");
+
+
+                 });*/
+
+                setSeleted();
+
+                function setSeleted(){
+                    var metaMenuHref = $("#selectedHref").val();
+                    //alert($("#menu a").html());
+                    $("#menu a").each(function(){
+                        var href = $(this).attr("href");
+                        if(href!=null){
+                            if(href+"" == metaMenuHref+""){
+                                $("#menu *").removeClass("active");
+                                //$("#menu *").removeClass("open");
+                                $(this).parents("li").addClass("active");
+                                $(this).parents(".submenu").css("display","block");
+                                $(this).parent().parents("li").addClass("open");
+                            }
+                        }
+                    });
+
+                }
+
+            });
+        </script>
     </head>
     <body class="no-skin">
+        <!-- 选择的菜单 -->
+        <input type="hidden" id="selectedHref" value="<sitemesh:write property='meta.menu' />">
         <jsp:include page="/WEB-INF/views/common/top.jsp"></jsp:include>
         <div class="main-container" id="main-container">
             <script type="text/javascript">
@@ -35,24 +80,23 @@
                             <ul class="breadcrumb">
                                 <li>
                                     <i class="ace-icon fa fa-home home-icon"></i>
-                                    <a href="#">Home</a>
+                                    <a href="#">首页</a>
                                 </li>
-
-                                <li>
+                                <%--<li>
                                     <a href="#">Other Pages</a>
-                                </li>
-                                <li class="active">Blank Page</li>
+                                </li>--%>
+                                <%--<li class="active">用户列表</li>--%>
                             </ul><!-- /.breadcrumb -->
 
                             <!-- #section:basics/content.searchbox -->
-                            <div class="nav-search" id="nav-search">
+                           <%-- <div class="nav-search" id="nav-search">
                                 <form class="form-search">
 								<span class="input-icon">
 									<input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
 									<i class="ace-icon fa fa-search nav-search-icon"></i>
 								</span>
                                 </form>
-                            </div><!-- /.nav-search -->
+                            </div>--%><!-- /.nav-search -->
 
                             <!-- /section:basics/content.searchbox -->
                         </div>
@@ -73,7 +117,7 @@
 
             <jsp:include page="/WEB-INF/views/common/foot.jsp"></jsp:include>
         </div>
-        <%--解决设置好使问题--%>
+        <%--解决页面设置问题--%>
         <script src="${ctxStatic}/ace/assets/js/ace/ace.settings.js"></script>
         <script src="${ctxStatic}/ace/assets/js/ace/ace.settings-rtl.js"></script>
         <script src="${ctxStatic}/ace/assets/js/ace/ace.settings-skin.js"></script>

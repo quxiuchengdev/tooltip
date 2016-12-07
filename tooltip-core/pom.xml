@@ -19,16 +19,7 @@
     </parent>
 
     <dependencies>
-        <!-- 依赖实体类 -->
-        <dependency>
-            <groupId>com.qxcwl.tooltip</groupId>
-            <artifactId>tooltip-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.qxcwl.tooltip</groupId>
-            <artifactId>tooltip-model</artifactId>
-        </dependency>
-
+        <!-- 依赖实体类Dao -->
         <dependency>
             <groupId>com.qxcwl.tooltip</groupId>
             <artifactId>tooltip-dao</artifactId>

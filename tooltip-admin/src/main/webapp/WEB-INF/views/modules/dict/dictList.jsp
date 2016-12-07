@@ -28,6 +28,7 @@
                 });
 
                 var contentTable = $('#contentTabel')
+                    .wrap("<div class='dataTables_borderWrap' />")
                     .dataTable( {
                         "info" : true,
                         "autoWidth": false,
@@ -62,12 +63,12 @@
                         "ajax":{
                             "url" : "${ctx}/dict/datatables",//给服务器发请求的url
                             "type" : "post",
-                            "data" :{
-                                "label":$("#label").val(),
-                                "type":$("#type").val(),
-                                "description":$("#description").val(),
-                            }
-
+                            "data": function (d) {
+                                //添加额外的参数传给服务器
+                                d.label = $('#label').val();
+                                d.type = $('#type').val();
+                                d.description = $('#description').val();
+                            },
                         },
                         "columns": [ //这个属性下的设置会应用到所有列，按顺序没有是空
                             {"data": 'id',"className":'center',"orderable":false}, //mData 表示发请求时候本列的列明，返回的数据中相同下标名字的数据会填充到这一列
@@ -115,6 +116,8 @@
                         /* "fnCreatedRow":function ( row, data, index ) {
                          $('td', row).eq(0).addClass("center");
                          } */
+                        "sScrollX": "98%",
+                        "sScrollXInner": "100%",
                         //绘图回调函数
                         "drawCallback": function(oSettings){
                             //增加提示框
@@ -186,52 +189,35 @@
 		</div>
 		<div class="widget-box" style="margin:0px 0px 6px 0px;">
 			<div class="widget-body">
-				<div class="widget-main">
-					<form class="form-search" id="searchForm" action="${ctx}/dict/list" method="post">
-						<div class="row">
-							<div class="col-xs-12 col-sm-8">
-								<div class="input-group">
-                                    <table class="">
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <%--<label style="font-size: 13px;">&nbsp;标签:&nbsp;</label>--%>
-                                                    &nbsp;&nbsp;<span class="label label-info">标签:</span>&nbsp;&nbsp;
-                                                </td>
-                                                <td>
-                                                    <input class="input-sm" type="text" id="label">
-                                                </td>
-                                                <td>
-                                                    &nbsp;&nbsp; <span class="label label-info">类型:</span>&nbsp;&nbsp;
-                                                </td>
-                                                <td>
-                                                    <input class="input-sm" type="text" id="type">
-                                                </td>
-                                                <td>
-                                                    &nbsp;&nbsp;<span class="label label-info">描述:</span>&nbsp;&nbsp;
-                                                </td>
-                                                <td>
-                                                    <input class="input-sm" type="text" id="description">
-                                                </td>
-                                                <td>
-                                                    &nbsp;&nbsp;
-                                                    <button type="button" class="btn btn-purple btn-sm" id="searchBtn">
-                                                        搜索
-                                                        <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
-                                                    </button>
-                                                    &nbsp;&nbsp;
-                                                    <button type="button" class="btn btn-blue3 btn-sm">
-                                                        删除一堆
-                                                        <i class="ace-icon fa fa-trash-o icon-on-right bigger-110"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-								</div>
-							</div>
-						</div>
-					</form>
+                <div class="widget-main no-padding">
+                    <form>
+                        <fieldset>
+                            <div class="inline">
+                                <label style="font-size: 13px;">标签:</label>
+                                <input class="input-sm" type="text" id="label">
+                            </div>
+                            <div class="inline">
+                                <label style="font-size: 13px;">类型:</label>
+                                <input class="input-sm" type="text" id="type">
+                            </div>
+                            <div class="inline">
+                                <label style="font-size: 13px;">描述:</label>
+                                <input class="input-sm" type="text" id="description">
+                            </div>
+                            <div class="inline">
+                                <button type="button" class="btn btn-purple btn-sm" id="searchBtn">
+                                    搜索
+                                    <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
+                                </button>
+                            </div>
+                            <div class="inline">
+                                <button type="button" class="btn btn-blue3 btn-sm">
+                                    删除一堆
+                                    <i class="ace-icon fa fa-trash-o icon-on-right bigger-110"></i>
+                                </button>
+                            </div>
+                        </fieldset>
+                    </form>
 				</div>
 			</div>
 		</div>

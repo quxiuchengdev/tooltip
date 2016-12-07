@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sitemesh >
     <content-processor>
-        <tag-rule-bundle class="com.qxcwl.tooltip.web.admin.sitemesh.ExtHtmlTagRuleBundle"/>
+        <tag-rule-bundle class="com.qxcwl.tooltip.web.sitemesh.ExtHtmlTagRuleBundle"/>
     </content-processor>
 	<mapping path="/a/*" decorator="/WEB-INF/views/decorators/adminBlank.jsp"/>
 	

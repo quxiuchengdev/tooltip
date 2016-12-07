@@ -1,7 +1,6 @@
 package com.qxcwl.tooltip.web.admin.dict;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.qxcwl.tooltip.common.page.Page;
@@ -10,7 +9,7 @@ import com.qxcwl.tooltip.model.DataEntity;
 import com.qxcwl.tooltip.model.dict.Dict;
 import com.qxcwl.tooltip.model.user.User;
 import com.qxcwl.tooltip.service.dict.DictService;
-import com.qxcwl.tooltip.web.admin.BaseController;
+import com.qxcwl.tooltip.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

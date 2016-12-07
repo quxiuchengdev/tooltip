@@ -52,5 +52,16 @@
     <!-- 定义无Controller的path<->view直接映射 -->
     <mvc:view-controller path="/" view-name="redirect:${web.view.index}"/>
 
+    <mvc:interceptors>
+        <bean class="com.qxcwl.tooltip.web.resubmit.TokenInterceptor" />
+    </mvc:interceptors>
 
+    <!--异常处理-->
+    <bean class="com.qxcwl.tooltip.web.resolver.WebSimpleMappingExceptionResolver">
+        <!--<property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">error/403</prop>
+            </props>
+        </property>-->
+    </bean>
 </beans>

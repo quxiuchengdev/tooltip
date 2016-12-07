@@ -3,6 +3,7 @@
 */
 (function($ , undefined) {
 
+ //设置按钮
  $('#ace-settings-btn').on(ace.click_event, function(e){
 	e.preventDefault();
 
@@ -10,6 +11,7 @@
 	$('#ace-settings-box').toggleClass('open');
  })
 
+ //Fixed Navbar
  $('#ace-settings-navbar').on('click', function(){
 	ace.settings.navbar_fixed(null, this.checked);//@ ace-extra.js
 	//$(window).triggerHandler('resize.navbar');
@@ -18,18 +20,21 @@
 	//if(ace.vars['webkit']) ace.helper.redraw(document.body);
  }).each(function(){this.checked = ace.settings.is('navbar', 'fixed')})
 
+ //Fixed Sidebar
  $('#ace-settings-sidebar').on('click', function(){
 	ace.settings.sidebar_fixed(null, this.checked);//@ ace-extra.js
 
 	//if(ace.vars['webkit']) ace.helper.redraw(document.body);
  }).each(function(){this.checked = ace.settings.is('sidebar', 'fixed')})
 
+ // Fixed Breadcrumbs
  $('#ace-settings-breadcrumbs').on('click', function(){
 	ace.settings.breadcrumbs_fixed(null, this.checked);//@ ace-extra.js
 
 	//if(ace.vars['webkit']) ace.helper.redraw(document.body);
  }).each(function(){this.checked = ace.settings.is('breadcrumbs', 'fixed')})
 
+ //Inside .container
  $('#ace-settings-add-container').on('click', function(){
 	ace.settings.main_container_fixed(null, this.checked);//@ ace-extra.js
 
@@ -37,7 +42,7 @@
  }).each(function(){this.checked = ace.settings.is('main-container', 'fixed')})
 
 
-
+ // Compact Sidebar
  $('#ace-settings-compact').on('click', function(){
 	if(this.checked) {
 		$('#sidebar').addClass('compact');
@@ -54,7 +59,7 @@
 	if(ace.vars['old_ie']) ace.helper.redraw($('#sidebar')[0], true);
  })/*.removeAttr('checked')*/
 
-
+ // Alt. Active Item
  $('#ace-settings-highlight').on('click', function(){
 	if(this.checked) $('#sidebar .nav-list > li').addClass('highlight');
 	else $('#sidebar .nav-list > li').removeClass('highlight');
@@ -62,7 +67,7 @@
 	if(ace.vars['old_ie']) ace.helper.redraw($('#sidebar')[0]);
  })/*.removeAttr('checked')*/
 
-
+ // Submenu on Hover
  $('#ace-settings-hover').on('click', function(){
 	if($('#sidebar').hasClass('h-sidebar')) return;
 	if(this.checked) {

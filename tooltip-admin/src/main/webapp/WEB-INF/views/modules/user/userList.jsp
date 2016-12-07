@@ -58,10 +58,10 @@
 
                     },
 				    "columns": [ //这个属性下的设置会应用到所有列，按顺序没有是空
-				                    {"data": 'regisTime'}, // sDefaultContent 如果这一列不需要填充数据用这个属性，值可以不写，起占位作用
+				                    {"data": 'regisTime',"className":"hidden-480"}, // sDefaultContent 如果这一列不需要填充数据用这个属性，值可以不写，起占位作用
 				                    {"data": 'username'},
-				                    {"data": 'nickname'},
-				                    {"data": 'mobileNumber'},
+				                    {"data": 'nickname',"className":"hidden-480"},
+				                    {"data": 'mobileNumber',"className":"hidden-480"},
 				                    {"data": 'status'},
 				                    {"data": 'id',"bSortable":false},//sClass 表示给本列加class,mData 表示发请求时候本列的列明，返回的数据中相同下标名字的数据会填充到这一列
 				                ],
@@ -145,46 +145,32 @@
 		</div>
 		<div class="widget-box" style="margin:0px 0px 6px 0px;">
 			<div class="widget-body">
-				<div class="widget-main">
-					<form class="form-search" id="searchForm" action="${ctx}/user/list" method="post">
-						<div class="row">
-							<div class="col-xs-12 col-sm-8">
-								<div class="input-group">
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    &nbsp;&nbsp;<span class="label label-info">IDC性质:</span>&nbsp;&nbsp;
-                                                </td>
-                                                <td>
-                                                    <input class="input-sm" type="text">
-                                                </td>
-                                                <td>
-                                                    &nbsp;&nbsp;<span class="label label-info">线路类型:</span>&nbsp;&nbsp;
-                                                </td>
-                                                <td>
-                                                    <input class="input-sm" type="text">
-                                                </td>
-                                                <td>
-                                                    &nbsp;&nbsp;<span class="label label-info">IDC区域:</span>&nbsp;&nbsp;
-                                                </td>
-                                                <td>
-                                                    <input class="input-sm" type="text">
-                                                </td>
-                                                <td>
-                                                    &nbsp;&nbsp;
-                                                    <button type="button" class="btn btn-purple btn-sm">
-                                                        搜索
-                                                        <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-								</div>
-							</div>
-						</div>
-					</form>
+				<div class="widget-main no-padding">
+                    <form>
+                        <fieldset>
+                            <div class="inline">
+                                <label style="font-size: 13px;">用户名:</label>
+                                <input type="text" class="input-sm" />
+                            </div>
+                           <%-- <div class="inline">
+                                <label style="font-size: 13px;">用户名:</label>
+                                <input type="text" placeholder="用户名" class="input-sm" />
+                            </div>--%>
+                            <div class="inline">
+                                <button type="button" class="btn btn-purple btn-sm" id="searchBtn">
+                                    搜索
+                                    <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
+                                </button>
+                            </div>
+                        </fieldset>
+                        <%--<div class="form-actions left">
+                            &nbsp; &nbsp;
+                            <button type="button" class="btn btn-purple btn-sm" id="searchBtn">
+                                搜索
+                                <i class="ace-icon fa fa-search icon-on-right bigger-110"></i>
+                            </button>
+                        </div>--%>
+                    </form>
 				</div>
 			</div>
 		</div>
@@ -193,16 +179,16 @@
 			<table id="contentTabel" class="table table-striped table-bordered table-hover dataTable">
 				<thead>
 					<tr role="row">
-                        <th class="sorting" >
+                        <th class="sorting" className="hidden-480" >
 							注册时间
 						</th>
                         <th class="sorting" >
 							用户名
 						</th>
-                        <th class="sorting" >
+                        <th class="sorting" className="hidden-480" >
 							昵称
 						</th>
-                        <th class="sorting" >
+                        <th class="sorting" className="hidden-480" >
 								<i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
 							 电话
 						</th>

@@ -9,6 +9,7 @@ Please refer to documentation for more info.
 
 (function($ , undefined) {
  //Switching to RTL (right to left) Mode
+ // Right To Left rtl
  $('#ace-settings-rtl').removeAttr('checked').on('click', function(){
 	switch_direction();
  });

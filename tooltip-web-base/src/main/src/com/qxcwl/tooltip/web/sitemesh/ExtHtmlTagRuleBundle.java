@@ -1,4 +1,4 @@
-package com.qxcwl.tooltip.web.admin.sitemesh;
+package com.qxcwl.tooltip.web.sitemesh;
 
 import org.sitemesh.SiteMeshContext;
 import org.sitemesh.content.ContentProperty;

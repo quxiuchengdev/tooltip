@@ -11,7 +11,7 @@ import com.qxcwl.tooltip.model.role.Role;
 import com.qxcwl.tooltip.model.user.User;
 import com.qxcwl.tooltip.service.menu.MenuService;
 import com.qxcwl.tooltip.service.role.RoleService;
-import com.qxcwl.tooltip.web.admin.BaseController;
+import com.qxcwl.tooltip.web.BaseController;
 import com.qxcwl.tooltip.web.admin.utils.DictUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

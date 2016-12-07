@@ -1,6 +1,6 @@
 package com.qxcwl.tooltip.web.admin.login;
 
-import com.qxcwl.tooltip.web.admin.BaseController;
+import com.qxcwl.tooltip.web.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

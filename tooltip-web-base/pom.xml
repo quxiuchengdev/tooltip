@@ -3,15 +3,17 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.qxcwl.tooltip</groupId>
-    <artifactId>tooltip-admin</artifactId>
-    <packaging>war</packaging>
+    <artifactId>tooltip-web-base</artifactId>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
+
     <parent>
         <artifactId>tooltip-parent</artifactId>
         <groupId>com.qxcwl.tooltip</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../tooltip-parent/pom.xml</relativePath>
     </parent>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -20,7 +22,17 @@
         </dependency>
         <dependency>
             <groupId>com.qxcwl.tooltip</groupId>
-            <artifactId>tooltip-web-base</artifactId>
+            <artifactId>tooltip-core</artifactId>
+        </dependency>
+        <!-- spring-webmvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <!-- sitemesh3 -->
+        <dependency>
+            <groupId>org.sitemesh</groupId>
+            <artifactId>sitemesh</artifactId>
         </dependency>
 
         <dependency>
@@ -49,4 +61,5 @@
             <version>3.0.1</version>
         </dependency>
     </dependencies>
+
 </project>

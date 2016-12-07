@@ -5,10 +5,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.qxcwl.tooltip.common.page.Page;
 import com.qxcwl.tooltip.common.utils.StringUtils;
+import com.qxcwl.tooltip.common.utils.Threads;
 import com.qxcwl.tooltip.model.DataEntity;
 import com.qxcwl.tooltip.model.menu.Menu;
 import com.qxcwl.tooltip.service.menu.MenuService;
-import com.qxcwl.tooltip.web.admin.BaseController;
+import com.qxcwl.tooltip.web.BaseController;
+import com.qxcwl.tooltip.web.resubmit.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +63,7 @@ public class MenuController extends BaseController {
 		return "modules/menu/menuList";
 	}
 
+	@Token(save=true)
 	@RequestMapping(value = "form")
 	public String form(Menu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
 		if(menu.getParent()!=null&&StringUtils.isNotEmpty(menu.getParent().getId())){
@@ -70,9 +73,13 @@ public class MenuController extends BaseController {
 		model.addAttribute("menu", menu);
 		return "modules/menu/menuForm";
 	}
-	
+
+	@Token(remove=true)
+	@ResponseBody
 	@RequestMapping(value = "save")
 	public String save(Menu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
+		//休息一分钟
+		Threads.sleep(10 * 1000);
 		if(StringUtils.isEmpty(menu.getId())){
 			menu.setDelFlag(DataEntity.DEL_FLAG_NORMAL);
 			menu.setId(UUID.randomUUID().toString().replace("-", ""));
@@ -86,8 +93,9 @@ public class MenuController extends BaseController {
 			menu.setParentIds(parent.getParentIds()+menu.getId()+",");
 			menuService.update(menu);
 		}
-		model.addAttribute("menu", menu);
-		return "redirect:" + adminPath + "/menu/";
+		//model.addAttribute("menu", menu);
+		//return "redirect:" + adminPath + "/menu/";
+		return "/menu/list";
 	}
 	
 
