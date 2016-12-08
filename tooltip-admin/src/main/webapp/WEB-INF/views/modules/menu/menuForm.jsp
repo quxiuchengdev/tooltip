@@ -105,7 +105,10 @@
 		<div class="widget-body">
 			<div class="widget-main">
 				<form:form id="inputForm" modelAttribute="menu" action="${ctx}/menu/save" method="post" class="form-horizontal">
-                    <input type="text" name="token" value="${token}" />
+                    <%--防止重复提交token--%>
+                    <input type="hidden" name="token" value="${token}" />
+                    <%--错误页面左侧菜单打开页面--%>
+                    <input type="hidden" name="exceptionMenuPath" value="${ctx}/menu/list" />
                     <!-- ID -->
 					<form:hidden path="id"/>
 					<div class="hr hr-24"></div>

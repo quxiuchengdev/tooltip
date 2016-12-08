@@ -7,10 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @Author 曲修成
- * @ClassName SimpleMappingExceptionResolver
- * @Description
- * @Date 2016-12-06 15:26:00
+ * 自定义异常处理
+ * @author 曲修成
+ * @className SimpleMappingExceptionResolver
+ * @description
+ * @date 2016-12-06 15:26:00
  */
 public class WebSimpleMappingExceptionResolver extends SimpleMappingExceptionResolver {
 
@@ -18,6 +19,8 @@ public class WebSimpleMappingExceptionResolver extends SimpleMappingExceptionRes
 	@Override
 	protected ModelAndView doResolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 		ex.printStackTrace();
+		String resbumitExceptionPath = request.getParameter("exceptionMenuPath");
+		request.setAttribute("exceptionMenuPath", resbumitExceptionPath);
 		return super.doResolveException(request, response, handler, ex);
 	}
 }

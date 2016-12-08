@@ -14,10 +14,7 @@ import com.qxcwl.tooltip.web.resubmit.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,23 +71,24 @@ public class MenuController extends BaseController {
 		return "modules/menu/menuForm";
 	}
 
-	@Token(remove=true)
+	@Token(remove = true)
 	@ResponseBody
-	@RequestMapping(value = "save")
+	@RequestMapping(value = "save", method = RequestMethod.POST)
 	public String save(Menu menu, HttpServletRequest request, HttpServletResponse response, Model model) {
+
 		//休息一分钟
 		Threads.sleep(10 * 1000);
-		if(StringUtils.isEmpty(menu.getId())){
+		if (StringUtils.isEmpty(menu.getId())) {
 			menu.setDelFlag(DataEntity.DEL_FLAG_NORMAL);
 			menu.setId(UUID.randomUUID().toString().replace("-", ""));
 			Menu parent = menuService.get(menu.getParent().getId());
-			menu.setParentIds(parent.getParentIds()+menu.getId()+",");
+			menu.setParentIds(parent.getParentIds() + menu.getId() + ",");
 			menu.setParent(parent);
 			menuService.insert(menu);
-		}else{
+		} else {
 			Menu parent = menuService.get(menu.getParent().getId());
 			menu.setParent(parent);
-			menu.setParentIds(parent.getParentIds()+menu.getId()+",");
+			menu.setParentIds(parent.getParentIds() + menu.getId() + ",");
 			menuService.update(menu);
 		}
 		//model.addAttribute("menu", menu);

@@ -58,10 +58,10 @@
 
     <!--异常处理-->
     <bean class="com.qxcwl.tooltip.web.resolver.WebSimpleMappingExceptionResolver">
-        <!--<property name="exceptionMappings">
+        <property name="exceptionMappings">
             <props>
-                <prop key="org.apache.shiro.authz.UnauthorizedException">error/403</prop>
+                <prop key="com.qxcwl.tooltip.web.exception.ResubmitException">error/resubmit</prop>
             </props>
-        </property>-->
+        </property>
     </bean>
 </beans>
