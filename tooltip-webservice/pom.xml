@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>tooltip-webservice</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <parent>
+        <artifactId>tooltip-parent</artifactId>
+        <groupId>com.qxcwl.tooltip</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../tooltip-parent/pom.xml</relativePath>
+    </parent>
+
+
+    <dependencies>
+        <!--网站依赖-->
+        <dependency>
+            <groupId>com.qxcwl.tooltip</groupId>
+            <artifactId>tooltip-web-base</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http-jetty</artifactId>
+            <version>2.4.6</version>
+        </dependency>
+    </dependencies>
+</project>

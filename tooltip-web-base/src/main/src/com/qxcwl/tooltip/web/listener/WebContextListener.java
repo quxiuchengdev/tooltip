@@ -1,5 +1,8 @@
 package com.qxcwl.tooltip.web.listener;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContext;
@@ -11,6 +14,8 @@ import javax.servlet.ServletContext;
  * @Date 2016-11-11 11:38:00
  */
 public class WebContextListener extends org.springframework.web.context.ContextLoaderListener {
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Override
 	public WebApplicationContext initWebApplicationContext(ServletContext servletContext) {
 		//加载使用信息
@@ -37,7 +42,7 @@ public class WebContextListener extends org.springframework.web.context.ContextL
 		sb.append("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n");
 		sb.append("         佛祖保佑       永无BUG               \n");
 		sb.append("                                             \n");
-		System.out.println(sb);
+		logger.info(sb.toString());
 		return super.initWebApplicationContext(servletContext);
 	}
 }

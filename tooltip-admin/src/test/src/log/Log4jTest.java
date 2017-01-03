@@ -18,9 +18,10 @@ import java.util.logging.LogManager;
  */
 public class Log4jTest {
 
-	private static Logger log1 = LoggerFactory.getLogger("Database");
+	private static Logger log1 = LoggerFactory.getLogger("Mail");
 
 	public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
 		String sss = (String) Class.forName("java.lang.String").newInstance();
+		log1.error("aaa");
 	}
 }
