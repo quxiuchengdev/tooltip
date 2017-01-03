@@ -1,7 +1,8 @@
 package com.qxcwl.tooltip.web.resubmit;
 
 import com.qxcwl.tooltip.web.exception.ResubmitException;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -21,7 +22,7 @@ import java.util.UUID;
 public class TokenInterceptor extends HandlerInterceptorAdapter {
 
 
-	private static final Logger LOG = Logger.getLogger(TokenInterceptor.class);
+	private static final Logger LOG = LoggerFactory.getLogger(TokenInterceptor.class);
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

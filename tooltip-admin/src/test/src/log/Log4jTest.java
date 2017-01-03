@@ -1,9 +1,10 @@
 package log;
 
 
-import org.apache.log4j.Appender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import com.qxcwl.tooltip.common.utils.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.io.File;
 import java.util.Enumeration;
@@ -17,10 +18,9 @@ import java.util.logging.LogManager;
  */
 public class Log4jTest {
 
-	private static Logger log1 = Logger.getLogger("Database");
+	private static Logger log1 = LoggerFactory.getLogger("Database");
 
-	public static void main(String[] args) {
-
-		log1.info("aaa");
+	public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+		String sss = (String) Class.forName("java.lang.String").newInstance();
 	}
 }

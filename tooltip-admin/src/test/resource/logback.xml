@@ -1,0 +1,38 @@
+<!--
+scan：当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true.
+scanPeriod：设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。
+            当scan为true时，此属性生效。默认的时间间隔为1分钟.
+debug：当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。
+-->
+<configuration scan="true" scanPeriod="30 seconds" >
+    <property name="default_pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t:%r] [%logger.%method] - [%-5level] %m%n" />
+    <property name="default_filepath" value="../logs/tooltip" />
+    <!-- 控制台适配器 -->
+    <appender name="ConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- pattern模式:http://logback.qos.ch/manual/layouts.html -->
+            <pattern>
+                ${default_pattern}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${default_filepath}/tooltip.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logFile'-'.%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <!-- pattern模式:http://logback.qos.ch/manual/layouts.html -->
+            <pattern>
+                ${default_pattern}
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ConsoleAppender"/>
+        <appender-ref ref="RollingFileAppender"/>
+    </root>
+</configuration>
